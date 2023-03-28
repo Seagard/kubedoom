@@ -18,6 +18,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
+  url: https://github.com/Seagard/kubedoom.git
   ref:
     branch: flux
     include:
