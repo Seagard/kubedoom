@@ -1,0 +1,32 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: bigbang
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  url: https://repo1.dso.mil/big-bang/bigbang.git
+  ref:
+    tag: 1.56.0
+  timeout: 60s
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: bigbang-values
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: flux
+    include:
+    - repository:
+        name: bigbang
+      fromPath: chart
+      toPath: clusters/minikube/bigbang-values/chart
+      # toPath:  defaults to repository.name https://fluxcd.io/flux/components/source/gitrepositories/#include
+    - repository:
+        name: bigbang
+      fromPath: base
+      toPath: clusters/minikube/bigbang-values/base
