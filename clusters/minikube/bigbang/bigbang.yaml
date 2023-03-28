@@ -2,8 +2,11 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
+  generation: 1
   name: bigbang
+  namespace: flux-system
 spec:
+  gitImplementation: go-git
   interval: 10m0s
   ref:
     tag: 1.56.0
@@ -14,9 +17,10 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: bigbang-values
-interval: 1m0s
+  namespace: flux-system
 spec:
-  url: https://github.com/Seagard/kubedoom
+interval: 1m0s
+  url: https://github.com/Seagard/kubedoom.git
   ref:
     branch: flux
     include:
