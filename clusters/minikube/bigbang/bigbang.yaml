@@ -1,4 +1,3 @@
-
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
@@ -28,9 +27,3 @@ spec:
     name: bigbang
   path: ./base/
   prune: true
-  ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: private-registry
-  namespace: bigbang
