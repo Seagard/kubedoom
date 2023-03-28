@@ -28,3 +28,9 @@ spec:
     name: bigbang
   path: ./base/
   prune: true
+  ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: private-registry
+  namespace: bigbang
