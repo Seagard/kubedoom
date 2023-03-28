@@ -6,10 +6,10 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
+  url: https://repo1.dso.mil/big-bang/bigbang.git
   ref:
     tag: 1.56.0
   timeout: 60s
-  url: https://repo1.dso.mil/big-bang/bigbang.git
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
@@ -18,7 +18,6 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
-  url: https://github.com/Seagard/kubedoom.git
   ref:
     branch: flux
     include:
