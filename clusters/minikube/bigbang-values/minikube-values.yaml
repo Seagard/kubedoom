@@ -1,0 +1,105 @@
+---
+istio:
+  values:
+    istiod:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      hpaSpec:
+        minReplicas: 1
+        maxReplicas: 1
+    values:
+      global:
+        proxy:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+        proxy_init:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+    ingressGateways:
+      public-ingressgateway:
+        k8s:
+          hpaSpec:
+            minReplicas: 1
+            maxReplicas: 1
+istiooperator:
+  values:
+    operator:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+jaeger:
+  enabled: false
+kiali:
+  enabled: false
+clusterAuditor:
+  enabled: false
+gatekeeper:
+  enabled: false
+kyverno:
+  enabled: false
+kyvernoreporter:
+  enabled: false
+kyvernopolicies:
+  enabled: false
+logging:
+  enabled: false
+eckoperator:
+  enabled: false
+fluentbit:
+  enabled: false
+promtail:
+  enabled: false
+loki:
+  enabled: false
+neuvector:
+  enabled: false
+tempo:
+  enabled: false
+monitoring:
+  values:
+    prometheus:
+      prometheusSpec:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 300m
+            memory: 2Gi
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+    prometheus-node-exporter:
+      hostRootFsMount:
+        enabled: false
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+    grafana:
+      testFramework:
+        enabled: false
+    prometheusOperator:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 100m
+            memory: 50Mi
+twistlock:
+  enabled: false
