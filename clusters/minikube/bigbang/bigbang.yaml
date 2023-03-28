@@ -2,8 +2,6 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
-  finalizers:
-  - finalizers.fluxcd.io
   generation: 1
   name: bigbang
   namespace: flux-system
@@ -14,6 +12,17 @@ spec:
     tag: 1.56.0
   timeout: 60s
   url: https://repo1.dso.mil/big-bang/bigbang
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: bigbang-values
+spec:
+  include:
+    - repository:
+        name: bigbang
+      fromPath: chart
+      # toPath:  defaults to repository.name https://fluxcd.io/flux/components/source/gitrepositories/#include
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
@@ -27,3 +36,10 @@ spec:
     name: bigbang
   path: ./base/
   prune: true
+  valuesFrom:
+    - kind: Secret
+      name: terraform
+      optional: true
+    - kind: ConfigMap
+      name: environment
+
