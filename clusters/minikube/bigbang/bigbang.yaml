@@ -2,23 +2,20 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
-  generation: 1
   name: bigbang
-  namespace: flux-system
 spec:
-  gitImplementation: go-git
   interval: 10m0s
   ref:
     tag: 1.56.0
   timeout: 60s
-  url: https://repo1.dso.mil/big-bang/bigbang
+  url: https://repo1.dso.mil/big-bang/bigbang.git
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: bigbang-values
-spec:
 interval: 1m0s
+spec:
   url: https://github.com/Seagard/kubedoom
   ref:
     branch: flux
@@ -32,42 +29,3 @@ interval: 1m0s
         name: bigbang
       fromPath: base
       toPath: clusters/minikube/bigbang-values/base
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-kind: Kustomization
-metadata:
-  name: bigbang-values
-spec:
-  interval: 1m
-  sourceRef:
-    kind: GitRepository
-    name: bigbang-values
-  path: ./clusters/minikube/bigbang-values/kustomization.yaml
-  prune: true
-  valuesFrom:
-    - kind: Secret
-      name: terraform
-      optional: true
-    - kind: ConfigMap
-      name: environment
-
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-kind: Kustomization
-metadata:
-  name: bigbang
-  namespace: flux-system
-spec:
-  interval: 5m
-  sourceRef:
-    kind: GitRepository
-    name: bigbang
-  path: ./base/
-  prune: true
-  valuesFrom:
-    - kind: Secret
-      name: terraform
-      optional: true
-    - kind: ConfigMap
-      name: environment
-
