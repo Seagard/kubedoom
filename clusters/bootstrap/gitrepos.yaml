@@ -21,12 +21,12 @@ spec:
   ref:
     branch: flux
   include:
-  - repository:
-      name: bigbang
-    fromPath: chart
-    toPath: clusters/minikube/bigbang-values/chart
-    # toPath:  defaults to repository.name https://fluxcd.io/flux/components/source/gitrepositories/#include
-  - repository:
-      name: bigbang
-    fromPath: base
-    toPath: clusters/minikube/bigbang-values/base
+    - repository:
+        name: bigbang
+      fromPath: chart
+      toPath: clusters/minikube/bigbang-values/chart
+      # toPath:  defaults to repository.name https://fluxcd.io/flux/components/source/gitrepositories/#include
+    - repository:
+        name: bigbang
+      fromPath: base
+      toPath: clusters/minikube/bigbang-values/base
